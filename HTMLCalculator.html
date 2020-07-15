@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+  <head>
+    <title>A HTML Calculator</title>
+    <style>
+      body {background-color: Lavender;}
+      h1 {color: MediumSlateBlue; font-family: Orbitron;}
+      p {color: black; font-family: Bahnschrift;}
+      label {color: black; font-family: Bahnschrift}
+      select {
+                appearance: none;
+                outline: 0;
+                background: pink;
+                background-image: none;
+                width: 50%;
+                height: 50%;
+                color: MediumSlateBlue;
+                cursor: pointer;
+                border:1px solid black;
+                border-radius:3px;
+            }
+            .select {
+                position: relative;
+                display: block;
+                width: 15em;
+                height: 2em;
+                line-height: 3;
+                overflow: hidden;
+                border-radius: .25em;
+                padding-bottom:10px;
+            }
+            .button {
+                border: none;
+                color: black;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+              }
+              input[type=text] {
+                width: 50%;
+                padding: 12px 12px;
+                margin: 8px 0;
+                box-sizing: border-box;
+              }
+              input[type=Number] {
+                width: 50%;
+                padding: 12px 12px;
+                margin: 8px 0;
+                box-sizing: border-box;
+              }
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+      function dropdownSelect() {
+        var opdrop=document.getElementById("operation_dropdown");
+        var valsfield=document.getElementById("value");
+        var divvalsfield=document.getElementById("divisionvalue");
+        var powvalsfield=document.getElementById("powvalue");
+        var rootvalsfield=document.getElementById("sqrtvalue");
+        document.getElementById("ansfield").style.display="none";
+        valsfield.style.display="none";
+        divvalsfield.style.display="none";
+        powvalsfield.style.display="none";
+        rootvalsfield.style.display="none";
+        document.getElementById("firstno").value=null;
+        document.getElementById("secondno").value=null;
+        document.getElementById("firstdivno").value=null;
+        document.getElementById("seconddivno").value=null;
+        document.getElementById("basefield").value=null;
+        document.getElementById("expofield").value=null;
+        document.getElementById("radicandval").value=null;
+        document.getElementById("indexval").value=null;
+        if (opdrop.value=="Addition") {
+          valsfield.style.display="block";
+        }
+        else if (opdrop.value=="Subtraction") {
+          valsfield.style.display="block";
+        }
+        else if (opdrop.value=="Multiplication") {
+          valsfield.style.display="block";
+        }
+        else if (opdrop.value=="Division") {
+          divvalsfield.style.display="block";
+        }
+        else if (opdrop.value=="Power") {
+          powvalsfield.style.display="block";
+        }
+        else if (opdrop.value=="sqrt") {
+          rootvalsfield.style.display="block";
+        }
+        else if (opdrop.value=="null") {
+          alert("Choose an option to proceed");
+        }
+      }
+      function getval() {
+        var val1=parseInt(document.getElementById("firstno").value);
+        var val2=parseInt(document.getElementById("secondno").value);
+        var opdrop=document.getElementById("operation_dropdown");
+        if (opdrop.value=="Addition") {
+          var val3=val1+val2;
+          document.getElementById("ansfield").style.display="block";
+          document.getElementById("value").style.display="none";
+          document.getElementById("ansfield").innerHTML="Your answer is : "+val3;
+        }
+        if (opdrop.value=="Subtraction") {
+          var val3=val1-val2;
+          document.getElementById("ansfield").style.display="block";
+          document.getElementById("value").style.display="none";
+          document.getElementById("ansfield").innerHTML="Your answer is : "+val3;
+        }
+        if (opdrop.value=="Multiplication") {
+          var val3=val1*val2;
+          document.getElementById("ansfield").style.display="block";
+          document.getElementById("value").style.display="none";
+          document.getElementById("ansfield").innerHTML="Your answer is : "+val3;
+        }
+      }
+      function getdivval() {
+        var val1=parseInt(document.getElementById("firstdivno").value);
+        var val2=parseInt(document.getElementById("seconddivno").value);
+        var val3=val1/val2;
+        document.getElementById("ansfield").style.display="block";
+        document.getElementById("divisionvalue").style.display="none";
+        document.getElementById("ansfield").innerHTML="Your answer is : "+val3;
+      }
+      function getpowval() {
+        var val1=parseInt(document.getElementById("basefield").value);
+        var val2=parseInt(document.getElementById("expofield").value);
+        var val3=Math.pow(val1,val2);
+        document.getElementById("ansfield").style.display="block";
+        document.getElementById("powvalue").style.display="none";
+        document.getElementById("ansfield").innerHTML="Your answer is : "+val3;
+      }
+      function sqrootval() {
+        var val1=parseInt(document.getElementById("radicandval").value);
+        var val2=parseInt(document.getElementById("indexval").value);
+        var val3=Math.pow(val1,1/val2);
+        document.getElementById("ansfield").style.display="block";
+        document.getElementById("sqrtvalue").style.display="none";
+        document.getElementById("ansfield").innerHTML="Your answer is : "+val3;
+      }
+    </script>
+    <div id="header"><h1>Welcome to HTML calculator!</h1></div>
+    <div id="operation_select"><label for="operation">Choose your desired option :</label>
+      <select name="operation_dropdown" id="operation_dropdown">
+        <option value="null">Select Option</option>
+        <option value="Addition">Addition</option>
+        <option value="Subtraction">Subtraction</option>
+        <option value="Multiplication">Multiplication</option>
+        <option value="Division">Division</option>
+        <option value="Power">Power</option>
+        <option value="sqrt">Root</option>
+      </select>
+    </div><br>
+    <button type="button" onclick="dropdownSelect()" class="button">Confirm Operation</button>
+    <div id="value" style="display: none">
+      <label for="firstnum">Enter first number:</label>
+      <input type="text" id="firstno" name="firstno" placeholder="First Number"><br>
+      <label for="secondnum">Enter second number:</label>
+      <input type="text" id="secondno" name="secondno" placeholder="Second Number"><br>
+      <button type="button" class="button" onclick="getval()">Submit Values</button>
+    </div>
+    <div id="divisionvalue" style="display: none">
+      <label for="firstdivnum">Enter dividend:</label>
+      <input type="text" id="firstdivno" name="firstdivno" placeholder="Dividend"><br>
+      <label for="seconddivnum">Enter divisor:</label>
+      <input type="number" id="seconddivno" name="seconddivno" placeholder="Divisor"><br>
+      <button type="button" class="button" onclick="getdivval()">Submit Values</button>
+    </div>
+    <div id="powvalue" style="display: none">
+      <label for="base">Enter base:</label>
+      <input type="text" id="basefield" name="basefield" placeholder="Base"><br>
+      <label for="exponent">Enter exponent:</label>
+      <input type="text" id="expofield" name="expofield" placeholder="Exponent"><br>
+      <button type="button" class="button" onclick="getpowval()">Submit Values</button>
+    </div>
+    <div id="sqrtvalue" style="display: none">
+      <label for="radicand">Enter radicand:</label>
+      <input type="text" id="radicandval" name="radicandval" placeholder="Radicand"><br>
+      <label for="index">Enter index:</label>
+      <input type="text" id="indexval" name="indexval" placeholder="Index"><br>
+      <button type="button" class="button" onclick="sqrootval()">Submit Values</button>
+    </div>
+    <p id="ansfield" style="display: none">answer</p>
+  </body>
+</html>
